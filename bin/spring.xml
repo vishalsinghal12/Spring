@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<context:annotation-config/>
+
+<bean id="circle" class="org.vishal.Circle">
+<property name="center" ref="pointA"/>
+</bean>
+
+	
+<bean id="triangle" class="org.vishal.Triangle">
+
+<property name="pointA" ref="pointA"/>
+<property name="pointB" ref="pointB"/>
+<property name="pointC" ref="pointC"/>
+</bean>
+		
+		
+		<bean id="pointA" class="org.vishal.Point">
+
+<property name="x" value="-10"/>
+<property name="y" value="-100"/>
+</bean>
+
+
+		<bean id="pointB" class="org.vishal.Point">
+
+<property name="x" value="${pointA.pointX}"/>
+<property name="y" value="${pointA.pointY}"/>
+</bean>
+
+
+		<bean id="pointC" class="org.vishal.Point">
+
+<property name="x" value="-1"/>
+<property name="y" value="-1"/>
+</bean>
+
+<bean class="org.vishal.MyPostProcessor"/>
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<property name="locations" value="pointsconfig.properties"/>
+</bean>
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+		  <list>
+		<value>mymessages</value>
+		 </list>
+</property>
+</bean>
+</beans>
+
+
+
+
+
+
+
+
+
